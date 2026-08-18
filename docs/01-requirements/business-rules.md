@@ -1,6 +1,6 @@
 # Business Rules
 
-This document defines the business rules that govern the Zavy platform. The rules are applied during data generation, validation, and pipeline processing. Status values use consistent enum naming throughout the project.
+Business rules applied during data generation, validation, and pipeline processing. Status values use the same enum names throughout the project.
 
 ## Order Lifecycle
 
@@ -77,7 +77,7 @@ SHIPPED → DELIVERED ──► RETURN path (after delivery)
 ## Shipment Rules
 
 - **BRU-037** — A shipment is created when order items move to `SHIPPED`.
-- **BRU-038** — A shipment belongs to exactly one order and contains one or more **shipment items**, each referencing an order item (see Shipment-Item Rules below).
+- **BRU-038** — A shipment belongs to exactly one order and contains one or more shipment items, each referencing an order item (see Shipment-Item Rules below).
 - **BRU-039** — Shipment status values: `PENDING_PICKUP`, `IN_TRANSIT`, `DELIVERED`, `FAILED_DELIVERY`, `RETURNED_TO_SENDER`.
 - **BRU-040** — An order reaches `DELIVERED` only after all its items are marked delivered in their shipments.
 

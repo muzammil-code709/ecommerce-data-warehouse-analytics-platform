@@ -1,8 +1,8 @@
 # Business Questions
 
-This document defines the key analytical questions the Zavy platform must answer. Every question must be answerable from the data defined in `data-requirements.md` using the KPIs defined in `kpi-definitions.md`.
+The analytical questions the platform must answer. Each one maps back to data defined in `data-requirements.md` and to the KPIs in `kpi-definitions.md`.
 
-**Terminology convention:** sales value (**Gross Merchandise Value / GMV**, also **Seller Sales**) is recognized for orders in `CONFIRMED`, `PROCESSING`, `SHIPPED`, or `DELIVERED` status; cancelled and `PLACED`-only orders are excluded. GMV is the product selling value and belongs to the **sellers**; **Zavy's own revenue is the commission** earned on those sales. Returned value reduces both GMV and the commission owed.
+**Terminology convention:** sales value (Gross Merchandise Value / GMV, also Seller Sales) is recognized for orders in `CONFIRMED`, `PROCESSING`, `SHIPPED`, or `DELIVERED` status; cancelled and `PLACED`-only orders are excluded. GMV is the product selling value and belongs to the sellers; Zavy's own revenue is the commission earned on those sales. Returned value reduces both GMV and the commission owed.
 
 ## Sales
 

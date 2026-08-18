@@ -2,19 +2,19 @@
 
 ## 1. Zavy Business Overview
 
-**Zavy** is a simulated multi-seller e-commerce marketplace. It connects **customers** who buy products with **sellers** who list and sell them. Zavy operates the marketplace platform: it manages the catalog, orders, payments, fulfilment, and provides analytics to the business.
+Zavy is a simulated multi-seller e-commerce marketplace. Customers buy products from sellers who list them on the platform. Zavy runs the marketplace: it manages the catalogue, orders, payments, and fulfilment, and it provides analytics on top of all of it.
 
-Zavy does **not** own the products sold on the platform. Sellers own and list their products; Zavy provides the storefront, transaction processing, and fulfilment coordination. This is the defining characteristic of a multi-seller marketplace business model.
+Zavy does not own the products sold on the platform. Sellers own and list their products; Zavy supplies the storefront, transaction processing, and fulfilment coordination. That is what makes it a marketplace rather than a retailer.
 
-All data used in this project is **synthetically generated** for educational and portfolio purposes. Zavy is a fictional business and no real customer, seller, or transaction data is used.
+All data used in this project is synthetically generated for educational and portfolio purposes. Zavy is a fictional business; no real customer, seller, or transaction data is used.
 
 ## 2. Business Model
 
-- **Multi-seller marketplace**: many independent sellers list products; customers buy from any seller through one platform.
-- **Commission-based**: Zavy's revenue is the **commission** it earns on seller sales, modelled via a per-seller commission rate. The product selling price belongs to the seller; Zavy never records it as its own revenue.
-- **Marketplace economics**: total customer spend on the platform is **Gross Merchandise Value (GMV)**, also called **Seller Sales**. It is the sellers' sales value. Zavy's own revenue is the commission earned on that GMV, net of commission refunded on returns. Zavy does not incur product costs (COGS belongs to sellers), so platform profit is not modelled.
+- **Multi-seller marketplace**: many independent sellers list products; customers buy from any of them through one platform.
+- **Commission-based**: Zavy's revenue is the commission it earns on seller sales, modelled as a per-seller commission rate. The product selling price belongs to the seller; Zavy never records it as its own revenue.
+- **Marketplace economics**: total customer spend on the platform is Gross Merchandise Value (GMV), also called Seller Sales. It is the sellers' sales value. Zavy's own revenue is the commission earned on that GMV, net of commission refunded on returns. Zavy does not incur product costs (COGS belongs to sellers), so platform profit is not modelled.
 - **Product catalogue**: products belong to categories and brands and are stored across a network of warehouses.
-- **Fulfilment**: Zavy coordinates inventory and shipment so that a single customer order may be fulfilled from one or more warehouses.
+- **Fulfilment**: Zavy coordinates inventory and shipment, so a single customer order may be fulfilled from more than one warehouse.
 - **Customer acquisition**: customers register, maintain addresses, place orders, pay, receive shipments, may return items, and may leave product reviews.
 
 ## 3. Main Business Processes
@@ -24,14 +24,12 @@ All data used in this project is **synthetically generated** for educational and
 3. **Payment** — each order generates one or more payment records; fulfilment proceeds once payment is accepted (or at delivery for cash on delivery).
 4. **Fulfilment & shipment** — inventory is reserved and reduced; items are picked and shipped from warehouses to the customer.
 5. **Delivery** — shipments progress through delivery states until the order is delivered.
-6. **Returns** — customers may request returns of delivered items within the return window; approved returns are received, restocked, and refunded.
+6. **Returns** — customers may return delivered items within the return window; approved returns are received, restocked, and refunded.
 7. **Reviews** — customers may review purchased and delivered products.
 8. **Inventory management** — stock levels change through receipts, sales, adjustments, and returned items.
 9. **Analytics & reporting** — transactional data is processed into a data warehouse to support business insight.
 
 ## 4. Main Business Domains
-
-The platform is organized into the following business domains:
 
 | Domain | Description |
 | --- | --- |
@@ -48,7 +46,7 @@ The platform is organized into the following business domains:
 
 ## 5. Transactional vs Analytical Workloads
 
-The platform serves two very different workloads:
+The platform serves two distinct workloads:
 
 **Transactional workload (OLTP)**
 - Supports day-to-day operations: placing orders, processing payments, updating inventory.
@@ -62,7 +60,7 @@ The platform serves two very different workloads:
 - Fewer, heavier queries that read large portions of history.
 - Dimensional schema (star schema) designed for fast aggregation.
 
-Running heavy analytical queries directly against the operational database would increase database load, slow down customer transactions, and make historical analysis difficult. Zavy therefore separates the two workloads.
+Running heavy analytical queries directly against the operational database would increase database load, slow down customer transactions, and make historical analysis difficult. Zavy therefore keeps the two workloads separate.
 
 ## 6. Why Zavy Needs a Separate Analytical Platform
 
@@ -74,10 +72,10 @@ Running heavy analytical queries directly against the operational database would
 
 ## 7. Planned Platform
 
-The eventual platform separates data into distinct layers:
+The platform separates data into distinct layers:
 
 ```
 Operational data  →  PostgreSQL OLTP  →  Incremental extraction  →  Processing & validation  →  Data warehouse (star schema)  →  Analytical SQL  →  Power BI  →  Business insights
 ```
 
-The initial implementation uses **PostgreSQL** and **Python**. Advanced technologies (Kafka, Debezium, Spark, DuckDB) are **optional** extensions and are not assumed to be mandatory.
+The initial implementation uses PostgreSQL and Python. Kafka, Debezium, Spark, and DuckDB are optional extensions and are not assumed to be mandatory.

@@ -1,8 +1,8 @@
 # Business Requirements
 
-This document defines the business requirements for the Zavy e-commerce data platform. Each requirement is uniquely identified and written to be concise and testable.
+The requirements below are grouped by domain. Each one has a stable identifier (BR-001, BR-002, …) and is stated so it can be verified against the implementation.
 
-**Terminology note:** sales value (**Gross Merchandise Value / GMV**, also **Seller Sales**) is recognized for orders in status `CONFIRMED`, `PROCESSING`, `SHIPPED`, or `DELIVERED` (cancelled and `PLACED`-only orders are excluded). Zavy is a marketplace: the product selling price is GMV/Seller Sales and belongs to the seller; **Zavy's own revenue is the commission** earned on those sales (per-seller commission rate). See `kpi-definitions.md` and `business-rules.md`.
+**Terminology note:** sales value (Gross Merchandise Value / GMV, also Seller Sales) is recognized for orders in status `CONFIRMED`, `PROCESSING`, `SHIPPED`, or `DELIVERED` (cancelled and `PLACED`-only orders are excluded). Zavy is a marketplace: the product selling price is GMV/Seller Sales and belongs to the seller; Zavy's own revenue is the commission earned on those sales (per-seller commission rate). See `kpi-definitions.md` and `business-rules.md`.
 
 ## Customer Management
 
@@ -63,7 +63,7 @@ This document defines the business requirements for the Zavy e-commerce data pla
 - **BR-028** — The platform must produce analytical answers for the key business questions defined in `business-questions.md`.
 - **BR-029** — The platform must calculate the KPIs defined in `kpi-definitions.md` consistently.
 - **BR-030** — The platform must provide reporting via Power BI dashboards covering executive, sales, customer, product/inventory, and seller views.
-- **BR-031** — Historical attribute changes (e.g., a customer moving to a new city) must be preserved **in the data warehouse** via SCD Type 2 so that analyses reflect the state at the time of each order. The OLTP database maintains only current operational state.
+- **BR-031** — Historical attribute changes (e.g., a customer moving to a new city) must be preserved in the data warehouse via SCD Type 2 so that analyses reflect the state at the time of each order. The OLTP database maintains only current operational state.
 - **BR-032** — The data pipeline must process new and changed operational data incrementally rather than reloading the entire dataset on every run.
 - **BR-033** — The platform must distinguish Gross Merchandise Value (total value of seller sales on the platform) from Zavy's commission revenue (commission applied to seller sales).
 - **BR-034** — Seller commission rates must be preserved so that Zavy commission revenue can be calculated per seller and over time.

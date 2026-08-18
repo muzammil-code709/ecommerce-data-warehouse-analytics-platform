@@ -1,10 +1,8 @@
 # Scope
 
-This document defines what is included in the Zavy platform project and what is explicitly excluded.
+What this project includes, and what it deliberately leaves out.
 
 ## In Scope
-
-The project delivers a complete, portfolio-grade data and analytics platform:
 
 **OLTP database**
 - A normalized transactional database (PostgreSQL) for customers, products, sellers, orders, order items, payments, shipments, warehouses, inventory, stock movements, returns, return items, and reviews.
@@ -32,11 +30,9 @@ The project delivers a complete, portfolio-grade data and analytics platform:
 **Testing and documentation**
 - Tests for database constraints, ETL correctness, and reconciliation.
 - Performance benchmark reports.
-- Professional documentation (architecture, database design, data dictionary, ETL, SQL, data quality, dashboard guide, setup guide).
+- Documentation: architecture, database design, data dictionary, ETL, SQL, data quality, dashboard guide, setup guide.
 
 ## Out of Scope
-
-The following are explicitly **not** part of this project:
 
 - Real customer transactions — all data is synthetic and generated.
 - Real payment processing or payment gateway integration — payments are simulated records only.

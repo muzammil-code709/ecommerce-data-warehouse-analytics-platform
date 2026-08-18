@@ -1,10 +1,10 @@
 # Non-Functional Requirements
 
-This document defines the quality attributes of the Zavy platform. Targets are realistic for a locally-run, portfolio-grade system on PostgreSQL; they are meant to be measurable but not artificially aggressive.
+Quality attributes for a locally-run system on PostgreSQL. The targets are meant to be measurable rather than aspirational.
 
 ## Performance
 
-- **NFR-001** — Standard analytical queries against the benchmark dataset must return results in a reasonable time for interactive reporting (target: most dashboards queries within 30 seconds on reference hardware).
+- **NFR-001** — Standard analytical queries against the benchmark dataset must return results in a reasonable time for interactive reporting (target: most dashboard queries within 30 seconds on reference hardware).
 - **NFR-002** — Transactional writes on the OLTP database must remain fast and must not be degraded by analytical workloads running concurrently on the warehouse.
 - **NFR-003** — The benefit of optimization techniques (indexes, partitioning, materialized views) must be measurable via `EXPLAIN ANALYZE` and documented through before/after benchmarks.
 

@@ -1,29 +1,29 @@
 # KPI Definitions
 
-This document defines every KPI the Zavy platform must calculate. Definitions are precise and unambiguous so that the same KPI value can be reproduced by any query or dashboard.
+Each KPI below is defined precisely enough that any query or dashboard produces the same value. These definitions are the source of truth for the analytics layer.
 
 ## Marketplace Economics
 
-Zavy is a multi-seller marketplace. **Sellers own the products**; Zavy earns a **commission** on seller sales. This distinction drives every money KPI in this document:
+Zavy is a multi-seller marketplace: sellers own the products and Zavy earns a commission on seller sales. Every money KPI in this document follows from that split:
 
 - **GMV (Gross Merchandise Value)** — the total value customers spend on the platform. Also called **Seller Sales**. It is the sellers' revenue, not Zavy's.
 - **Zavy Commission Revenue** — the commission Zavy earns on seller sales (per-seller commission rate applied to each order item).
 - **Net Commission Revenue** — Zavy commission revenue after refunding commission on received returns.
-- **Platform Profit** — **not defined.** Zavy does not incur product COGS (that is the seller's cost) and no Zavy operating-cost data is modelled, so a platform profit cannot be computed. Product-level margin is tracked as a seller-view metric only.
+- **Platform Profit** — not defined. Zavy does not incur product COGS (that is the seller's cost) and no Zavy operating-cost data is modelled, so a platform profit cannot be computed. Product-level margin is tracked as a seller-view metric only.
 
 ## Global Conventions
 
-The following conventions apply to all KPIs unless stated otherwise:
+These conventions apply to every KPI unless a specific KPI states otherwise:
 
 | Term | Definition |
 | --- | --- |
 | Recognized order | An order with status `CONFIRMED`, `PROCESSING`, `SHIPPED`, or `DELIVERED`. Orders in `PLACED` or `CANCELLED` status are excluded. |
 | Recognized order item | A line item belonging to a recognized order. |
 | Sold quantity | The sum of `quantity` over recognized order items. |
-| Returned quantity | The sum of `quantity` over return items whose return is **approved and received** (return status `RETURNED` or `REFUNDED`). Rejected and pending returns are excluded. |
+| Returned quantity | The sum of `quantity` over return items whose return is approved and received (return status `RETURNED` or `REFUNDED`). Rejected and pending returns are excluded. |
 | Unit price | The unit price captured on the order item at the time of the order. |
-| Unit cost | The product cost **captured on the order item at order time** (snapshot), so gross margin stays reproducible after product cost changes. Used only for the seller-view product gross margin KPI. |
-| Commission rate | The seller's commission rate (0–30%) **captured on the order item at order time** (snapshot), so commission revenue stays reproducible after the seller's rate changes. |
+| Unit cost | The product cost captured on the order item at order time (snapshot), so gross margin stays reproducible after product cost changes. Used only for the seller-view product gross margin KPI. |
+| Commission rate | The seller's commission rate (0–30%) captured on the order item at order time (snapshot), so commission revenue stays reproducible after the seller's rate changes. |
 | Returned value | `Σ (return_item.quantity × order_item.unit_price)` for returns with status `RETURNED` or `REFUNDED`. |
 | Reporting period | The time interval the KPI is computed for (day, month, quarter, or year) unless stated otherwise. |
 
@@ -62,7 +62,7 @@ The following conventions apply to all KPIs unless stated otherwise:
 - **Formula:** `(value(current period) − value(previous period)) / value(previous period) × 100`.
 - **Business meaning:** Shows whether the business is growing or shrinking.
 - **Inclusion/exclusion rules:**
-  - Default basis is **GMV**; the same formula may be applied to Zavy Commission Revenue for the Zavy-view growth.
+  - Default basis is GMV; the same formula may be applied to Zavy Commission Revenue for the Zavy-view growth.
   - The basis and default period (month) must be stated with the result.
   - Undefined (blank) when the previous-period value is zero.
 
@@ -101,7 +101,7 @@ The following conventions apply to all KPIs unless stated otherwise:
 - **Formula:** `(unit_price − unit_cost) / unit_price × 100`.
 - **Business meaning:** Seller-facing product economics.
 - **Inclusion/exclusion rules:**
-  - This is a **seller-view** metric. Product COGS is the seller's cost, not Zavy's; it must not be used to compute Zavy profit.
+  - This is a seller-view metric. Product COGS is the seller's cost, not Zavy's; it must not be used to compute Zavy profit.
   - Uses the unit price and unit cost captured on the order item at order time, so the margin stays reproducible after later product price or cost changes.
   - Undefined when unit price is zero.
 
@@ -172,7 +172,7 @@ The following conventions apply to all KPIs unless stated otherwise:
 ### 15. Inventory Turnover
 
 - **Definition:** How many times inventory is sold and replaced during a period.
-- **Formula:** `Units sold over the period / Average units on hand over the period`, where average units on hand is the mean of daily `quantity on hand` (per product per warehouse) across the period, sourced from **historical inventory snapshots** maintained in the warehouse.
+- **Formula:** `Units sold over the period / Average units on hand over the period`, where average units on hand is the mean of daily `quantity on hand` (per product per warehouse) across the period, sourced from historical inventory snapshots maintained in the warehouse.
 - **Business meaning:** Efficiency of stock usage.
 - **Inclusion/exclusion rules:**
   - Period must be stated (default: year).
@@ -181,10 +181,10 @@ The following conventions apply to all KPIs unless stated otherwise:
 
 ### 16. Out-of-Stock Rate
 
-- **Definition:** Percentage of products with zero available stock **across all warehouses** at the end of the reporting period.
+- **Definition:** Percentage of products with zero available stock across all warehouses at the end of the reporting period.
 - **Formula:** `(products with Σ quantity on hand across all warehouses = 0 / total products in scope) × 100`.
 - **Business meaning:** Product availability health.
 - **Inclusion/exclusion rules:**
-  - Availability is aggregated across all warehouses: a product with stock in any warehouse is **available**, so a product that is out of stock in one warehouse but stocked in another is **not** counted as out of stock.
+  - Availability is aggregated across all warehouses: a product with stock in any warehouse is available, so a product that is out of stock in one warehouse but stocked in another is not counted as out of stock.
   - Snapshot metric computed at the end of the period.
   - Scope (all products vs active products) must be stated with the result.

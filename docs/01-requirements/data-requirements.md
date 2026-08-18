@@ -1,6 +1,6 @@
 # Data Requirements
 
-This document defines the data domains captured by the Zavy platform and their expected characteristics. It also defines the target data volumes used for development and performance testing.
+The data domains Zavy captures, their expected characteristics, and the target volumes used for development and performance testing.
 
 ## Data Domains
 
@@ -77,7 +77,7 @@ This document defines the data domains captured by the Zavy platform and their e
 - Key: product + warehouse.
 - Values: quantity on hand, last-updated timestamp.
 - Characteristics: one row per product–warehouse combination.
-- Note: this table holds **current** on-hand only. Historical inventory levels are reconstructed in the warehouse layer from stock movements into **inventory snapshots** (e.g., daily quantity on hand per product per warehouse) used for inventory turnover and out-of-stock analytics.
+- Note: this table holds current on-hand only. Historical inventory levels are reconstructed in the warehouse layer from stock movements into inventory snapshots (e.g., daily quantity on hand per product per warehouse) used for inventory turnover and out-of-stock analytics.
 
 ### Stock Movements
 - Identity: unique stock movement ID, type (`RECEIPT`, `SALE`, `ADJUSTMENT`, `RETURN_IN`), quantity (signed), movement date, optional reference (e.g., order item).

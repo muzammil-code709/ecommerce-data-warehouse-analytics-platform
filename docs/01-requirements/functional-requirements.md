@@ -1,6 +1,6 @@
 # Functional Requirements
 
-This document defines what the Zavy platform must be able to do. Requirements are uniquely identified and grouped by capability area. They are written at the platform level and do not lock in implementation details (the underlying technologies are PostgreSQL and Python).
+Functional requirements for the Zavy platform, grouped by capability area. They are written at the platform level and do not lock in implementation details; the reference stack is PostgreSQL and Python.
 
 ## Data Storage (OLTP)
 
@@ -36,7 +36,7 @@ This document defines what the Zavy platform must be able to do. Requirements ar
 
 ## Historical Records
 
-- **FR-018** — The **data warehouse** must preserve historical attribute changes using Slowly Changing Dimension (SCD) Type 2 logic, keeping both the old and new versions of changed records. The OLTP database is not required to maintain history; it stores current operational state only.
+- **FR-018** — The data warehouse must preserve historical attribute changes using Slowly Changing Dimension (SCD) Type 2 logic, keeping both the old and new versions of changed records. The OLTP database is not required to maintain history; it stores current operational state only.
 - **FR-019** — Every SCD record must track validity start date, end date, and a current-record flag.
 - **FR-020** — Fact records must reference the correct dimension version in effect at the time of the event.
 
