@@ -66,4 +66,4 @@ Functional requirements for the Zavy platform, grouped by capability area. They 
 
 ## Split Fulfilment
 
-- **FR-033** — The platform must record shipment-item allocation so that split fulfilment of order items across shipments is represented.
+- **FR033** — The platform must record shipment-item allocation so that split fulfilment of order items across shipments is represented.
