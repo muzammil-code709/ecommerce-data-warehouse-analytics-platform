@@ -1,5 +1,3 @@
-# Business Context — Zavy
-
 ## 1. Zavy Business Overview
 
 Zavy is a simulated multi-seller e-commerce marketplace. Customers buy products from sellers who list them on the platform. Zavy runs the marketplace: it manages the catalogue, orders, payments, and fulfilment, and it provides analytics on top of all of it.
