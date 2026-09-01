@@ -60,7 +60,7 @@ Zavy is a multi-seller e-commerce marketplace. The platform decouples operationa
 * **Purpose**: Serves as the single operational source of truth (`ecom_oltp`), optimized for fast ACID transactions and data integrity.
 * **Responsibilities**:
   * Enforces relational constraints (PK, FK, UNIQUE, NOT NULL, CHECK).
-  * Stores normalized data (3NF) across customers, addresses, products, categories, brands, sellers, orders, order items, payments, shipments, shipment items, warehouses, inventory, stock movements, returns, return items, and reviews.
+  * Stores normalized operational entities across customers, addresses, products, categories, brands, sellers, orders, order items, payments, shipments, shipment items, warehouses, inventory, stock movements, returns, return items, and reviews.
   * Captures order-time pricing snapshots (`unit_price`, `unit_cost`, `commission_rate`) on order line items.
   * Tracks operational record timestamps (`created_at`, `updated_at`).
 * **Input**: Transactional CRUD operations from marketplace workflows.
@@ -107,9 +107,8 @@ Zavy is a multi-seller e-commerce marketplace. The platform decouples operationa
 ### 2.6 Data Warehouse Layer (PostgreSQL DW)
 * **Purpose**: Stores historical, clean, and modeled analytical data (`dw`) organized into a Star Schema optimized for high-performance aggregations and multi-dimensional analysis.
 * **Responsibilities**:
-  * Houses dimension tables (`dim_customer`, `dim_product`, `dim_seller`, `dim_date`, `dim_location`, `dim_payment`) with surrogate keys.
+  * Houses dimension tables and fact tables with surrogate keys.
   * Preserves historical dimension attributes via SCD Type 2 fields (`effective_date`, `end_date`, `is_current`).
-  * Houses fact tables (`fact_sales`, `fact_returns`, `fact_inventory`) with documented grain definitions.
   * Maintains periodic inventory snapshot tables for point-in-time stock calculations.
   * Applies physical optimizations: B-tree indexes, composite indexes, covering indexes, and table partitioning on large transactional facts (e.g., by order date).
 * **Input**: Validated dimension and fact datasets from the transformation layer.

@@ -52,19 +52,9 @@ This document details the technologies selected for the Zavy platform, why each 
 
 The core platform is designed to be fully functional on a local machine using only PostgreSQL and Python. Advanced distributed or streaming technologies are explicitly treated as **optional extensions**:
 
-```text
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                          CORE vs OPTIONAL STACK                             │
-├───────────────────────────────┬─────────────────────────────────────────────┤
-│ Core (Baseline Project)       │ Optional Future Extensions                  │
-├───────────────────────────────┼─────────────────────────────────────────────┤
-│ • PostgreSQL 16 (OLTP + DW)   │ • Kafka & Debezium (Real-time CDC)          │
-│ • Python 3.13 + Pandas        │ • Apache Spark / PySpark (Distributed ETL)  │
-│ • SQLAlchemy 2.0 + psycopg 3  │ • DuckDB (Embedded in-process analytical SQL│
-│ • PostgreSQL Views / Mat Views│ • Airflow / Prefect (Advanced Orchestration)│
-│ • Power BI Dashboards         │ • Cloud DW (Snowflake / BigQuery / Redshift)│
-└───────────────────────────────┴─────────────────────────────────────────────┘
-```
+- Kafka & Debezium (real-time CDC)
+- Apache Spark / PySpark (distributed ETL)
+- DuckDB (embedded local OLAP)
 
 ### 3.1 Apache Kafka & Debezium (Optional Streaming CDC)
 * **Role**: Real-time event capture directly from PostgreSQL WAL logs into message topics.

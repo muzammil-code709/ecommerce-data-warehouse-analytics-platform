@@ -32,7 +32,7 @@ This document records the foundational architecture decisions for the Zavy platf
   * Full support for `EXPLAIN (ANALYZE, BUFFERS)` to benchmark query execution plans and index impact.
   * Native connector support across Python (`psycopg`, SQLAlchemy) and Power BI.
 * **Trade-offs**:
-  * PostgreSQL is a row-oriented relational engine, not a specialized MPP columnar data warehouse (e.g., Snowflake, BigQuery, ClickHouse). For extreme datasets (>50M rows), a dedicated columnar engine would scan faster.
+  * PostgreSQL is a row-oriented relational engine, not a specialized MPP columnar data warehouse. For extreme datasets (>50M rows), a dedicated columnar engine would scan faster.
   * Requires deliberate indexing, partitioning, and materialized views to achieve high performance on large analytical queries.
 
 ---
@@ -88,7 +88,7 @@ This document records the foundational architecture decisions for the Zavy platf
 
 * **Status**: Accepted
 * **Context**: Operational entities (e.g., customer addresses, seller locations) change over time. The business requires historical reporting to reflect the dimensional state active at the time an order occurred.
-* **Decision**: Implement SCD Type 2 tracking exclusively in the Data Warehouse layer (`dw`) on selected dimensions (`dim_customer`, etc.). The OLTP database retains only the current operational state.
+* **Decision**: Implement SCD Type 2 tracking exclusively in the Data Warehouse layer (`dw`) on selected dimensions. The OLTP database retains only the current operational state.
 * **Reason**: Operational databases are optimized for fast writes of the current reality; forcing SCD Type 2 into OLTP complicates application CRUD queries and violates standard operational normalization. The data warehouse is the correct architectural home for historical dimension tracking.
 * **Benefits**:
   * Keeps the OLTP schema clean, simple, and standard (3NF current state).
