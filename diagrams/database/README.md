@@ -1,1 +1,0 @@
-database diagram for OLTP
